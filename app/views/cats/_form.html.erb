@@ -1,0 +1,53 @@
+<% action_url = @cat.persisted? ? cat_url(@cat) : cats_url %>
+<% form_method = @cat.persisted? ? "PATCH" : "POST" %>
+<% submit_text = @cat.persisted? ? "Update Cat!" : "Create Cat!" %>
+
+
+<form action="<%= action_url %>" method="POST">
+  <input type="hidden" name="_method" value="<%= form_method %>">
+
+  <!-- text box for entering name -->
+  <label for="cat_name">Name:</label>
+  <input type="text" name="cat[name]" id="cat_name" value="<%= @cat.name %>">
+  <br><br>
+
+  <!-- radio buttons for sex -->
+
+  <input type="radio" name="cat[sex]" id="cat_sex_female" value = "F" <%= "checked" if @cat.sex == "F" %>>
+  <label for="cat_sex_female">Female</label>
+  <br>
+
+  <input type="radio" name="cat[sex]" id="cat_sex_male" value = "M" <%= "checked" if @cat.sex == "M" %>>
+  <label for="cat_sex_male">Male</label>
+  <br><br>
+
+
+  <!-- drop down menu for color -->
+  <label for="cat_color">Color:</label>
+  <select name="cat[color]" id="cat_color">
+    <option value="" selected="selected">
+    <% Cat::COLORS.each do |color| %>
+      <option value="<%= color %>"
+              <%= "selected" if @cat.color == color %>>
+          <%= color %>
+      </option>
+    <% end %>
+  </select>
+  <br><br>
+
+
+  <!-- calendar -->
+  <label for="birth_date">Birthday:</label>
+  <input type="date" name="cat[birth_date]" id="birth_date" value = <%= @cat.birth_date %>>
+  <br><br>
+
+
+  <!-- text area -->
+  <label for="description">Description:</label>
+  <!-- <input type="textarea" name="cat[description]" id="description" value = <%= @cat.description %>> -->
+  <textarea rows="4" cols="20" name="cat[description]" id="description"> <%= @cat.description %> </textarea>
+  <br><br>
+
+  <input type="submit" value="<%= submit_text %>">
+
+</form>

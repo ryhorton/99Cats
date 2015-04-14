@@ -1,0 +1,14 @@
+<h1> Cat rental request #<%= @cat_rental_request.id %> </h1>
+
+  <table>
+    <tr>
+      <th> Cat </th>
+      <th> Start date </th>
+      <th> End date </th>
+    </tr>
+    <tr>
+      <td> <%= @cat_rental_request.cat.name %> </td> 
+      <td> <%= @cat_rental_request.start_date %> </td>
+      <td> <%= @cat_rental_request.end_date %> </td>
+    </tr>
+  </table>
