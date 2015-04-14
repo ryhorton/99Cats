@@ -1,0 +1,42 @@
+
+<h1> Create new cat! </h1>
+
+  <form action=<%= cats_url %> method="post">
+
+    <!-- text box for entering name -->
+    <label for="cat_name">Name:</label>
+    <input type="text" name="cat[name]" id="cat_name">
+    <br><br>
+
+    <!-- radio buttons for sex -->
+    <input type="radio" name="cat[sex]" id="cat_sex_female" value = "F">
+    <label for="cat_sex_female">Female</label>
+    <br>
+
+    <input type="radio" name="cat[sex]" id="cat_sex_male" value = "M">
+    <label for="cat_sex_male">Male</label>
+    <br><br>
+
+
+    <!-- drop down menu for color -->
+    <label for="cat_color">Color:</label>
+    <select name="cat[color]" id="cat_color">
+      <option value="black">Black</option>
+      <option value="brown">Brown</option>
+      <option value="calico">Calico</option>
+      <option selected="selected"> </option>
+    </select>
+    <br><br>
+
+    <label for="birth_date">Birthday:</label>
+    <input type="date" name="cat[birth_date]" id="birth_date">
+    <br><br>
+
+    <label for="description">Description:</label>
+    <!-- <input type="textarea" name="cat[description]" id="description"> -->
+    <textarea rows="4" cols="20" name="cat[description]" id="description"></textarea>
+    <br><br>
+
+    <input type="submit" value="Create cat!">
+
+  </form>
