@@ -1,5 +1,13 @@
 <h1> <%= @cat.name %> </h1>
 
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <%= error %>
+      <br>
+    <% end %>
+    <br>
+  <% end %>
+
   <table>
     <tr>
       <th> Age </th>
@@ -38,3 +46,5 @@
     </tr>
     <% end %>
   </table>
+
+<a href="<%= new_cat_rental_request_url %>">Create a new rental request.</a>

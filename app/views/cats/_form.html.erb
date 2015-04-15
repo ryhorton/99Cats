@@ -4,6 +4,8 @@
 
 
 <form action="<%= action_url %>" method="POST">
+  <%= authenticity_token_input %>
+
   <input type="hidden" name="_method" value="<%= form_method %>">
 
   <!-- text box for entering name -->

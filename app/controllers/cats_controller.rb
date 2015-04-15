@@ -1,5 +1,7 @@
 class CatsController < ApplicationController
 
+  before_action :require_ownership!, only: [:edit, :update]
+
   def index
     @cats = Cat.all
 
@@ -13,7 +15,7 @@ class CatsController < ApplicationController
   end
 
   def create
-    @cat = Cat.new(cat_params)
+    @cat = current_user.cats.new(cat_params)
 
     if @cat.save
       redirect_to cat_url(@cat)
@@ -24,13 +26,12 @@ class CatsController < ApplicationController
 
   def new
     @cat = Cat.new
-
     render :new
   end
 
   def edit
     @cat = Cat.find(params[:id])
-    
+
     render :edit
   end
 
@@ -48,7 +49,7 @@ class CatsController < ApplicationController
   private
 
   def cat_params
-    params[:cat].permit(:name, :birth_date, :color, :sex, :description)
+    params.require(:cat).permit(:name, :birth_date, :color, :sex, :description)
   end
 
 end

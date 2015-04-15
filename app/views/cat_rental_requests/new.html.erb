@@ -1,3 +1,12 @@
 <h1>Create a new rental request!</h1>
 
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+    <br>
+  <% end %>
+  <br>
+<% end %>
+
 <%= render "form", cat_rental_request: @cat_rental_request %>

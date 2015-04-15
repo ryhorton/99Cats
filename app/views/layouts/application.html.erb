@@ -8,6 +8,28 @@
 </head>
 <body>
 
+  <% if current_user.nil? %>
+
+    <p>Please log in or sign up!</p>
+
+    <!-- link that redirects user to login page -->
+    <a href="<%= new_session_url %>">Log in / Sign up</a>
+
+  <% else %>
+
+    <p>Welcome, <%= current_user.user_name %>!</p>
+
+    <!-- button that logs user out -->
+    <form action="<%= session_url %>" method="POST">
+      <%= authenticity_token_input %>
+
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Log out">
+    </form>
+
+
+  <% end %>
+
 <%= yield %>
 
 </body>
