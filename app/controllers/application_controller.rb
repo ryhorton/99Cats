@@ -28,10 +28,16 @@ class ApplicationController < ActionController::Base
     cat = Cat.find(params[:id])
 
     unless cat.owner == current_user
-      # Create flash error for different user editing cat
-      #
-      # errors[:ownership] << "Must own cat in order to edit."
-      # flash.now[:errors] = cat.errors.full_messages
+      flash[:errors] = ["Can't edit cat you don't own."]
+      redirect_to cat_url(cat)
+    end
+  end
+
+  def require_ownership_to_change_status!
+    cat = CatRentalRequest.find(params[:id]).cat
+
+    unless cat.owner == current_user
+      flash[:errors] = ["Can't approve or deny rental request for cat you don't own."]
       redirect_to cat_url(cat)
     end
   end

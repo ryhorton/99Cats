@@ -1,6 +1,7 @@
 class CatsController < ApplicationController
 
   before_action :require_ownership!, only: [:edit, :update]
+  before_action :require_current_user!, except: [:index]
 
   def index
     @cats = Cat.all
@@ -44,7 +45,6 @@ class CatsController < ApplicationController
       render :edit
     end
   end
-
 
   private
 

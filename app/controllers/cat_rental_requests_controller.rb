@@ -1,5 +1,8 @@
 class CatRentalRequestsController < ApplicationController
 
+  before_action :require_ownership_to_change_status!, only: [:approve, :deny]
+  before_action :require_current_user!
+
   def approve
     current_cat_rental_request.approve!
     redirect_to cat_url(current_cat)
@@ -9,7 +12,6 @@ class CatRentalRequestsController < ApplicationController
     current_cat_rental_request.deny!
     redirect_to cat_url(current_cat)
   end
-
 
   def index
     @cat_rental_requests = CatRentalRequest.all
@@ -24,7 +26,7 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def create
-    @cat_rental_request = CatRentalRequest.new(cat_rental_request_params)
+    @cat_rental_request = current_user.cat_rental_requests.new(cat_rental_request_params)
 
     if @cat_rental_request.save
       redirect_to cat_url(@cat_rental_request.cat)
